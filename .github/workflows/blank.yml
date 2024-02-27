@@ -1,0 +1,25 @@
+name: New Issue Bot
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  create-branch-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install requests  # or any other necessary libraries
+
+      - name: Create branch and PR
+        run: python create_branch_and_pr.py ${{ github.event.issue.number }} ${{ github.event.issue.title }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
