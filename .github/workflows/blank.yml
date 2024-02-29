@@ -14,6 +14,8 @@ jobs:
 
       - name: Create Branch
         run: |
+          git config --global user.email "issuebot@learnprompting.com"
+          git config --global user.name "Issue Bot"
           git checkout -b issue-${{ github.event.issue.number }}
           git commit --allow-empty -m "Fixes issue #${{ github.event.issue.number }}"
           git push origin issue-${{ github.event.issue.number }}
