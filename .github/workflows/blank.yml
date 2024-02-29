@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Create Branch
         run: |
@@ -21,11 +21,6 @@ jobs:
           git push origin issue-${{ github.event.issue.number }}
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Fixes issue #${{ github.event.issue.number }}"
-          title: "Fix issue #${{ github.event.issue.number }}"
-          body: "This pull request addresses issue #${{ github.event.issue.number }}."
-          branch: issue-${{ github.event.issue.number }}
-          base: main
+        run: gh pr create -B "main" -H "issue-${{ github.event.issue.number }}" --title "Pr to Fix Issue ${{ github.event.issue.number }} - ${{ github.event.issue.title }}" --body "Created by Github actions"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
