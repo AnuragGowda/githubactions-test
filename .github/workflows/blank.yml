@@ -21,6 +21,6 @@ jobs:
           git push origin issue-${{ github.event.issue.number }}
 
       - name: Create Pull Request
-        run: gh pr create -B "main" -H "issue-${{ github.event.issue.number }}" --title "Pr to Fix Issue #${{ github.event.issue.number }} - ${{ github.event.issue.title }}" --body "Created by Github actions"
+        run: gh pr create -B "main" -H "issue-${{ github.event.issue.number }}" --title "Pr to Fix Issue \#${{ github.event.issue.number }} - ${{ github.event.issue.title }}" --body "Created by Github actions"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
